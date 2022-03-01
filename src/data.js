@@ -113,6 +113,31 @@ export const sex = {
   "UNKNOWN_SEX": 2995,
 };
 
+// synthetic public dashboard data, array of object format
+export const ages_array = [
+  { x: "20", y: 332 },
+  { x: "30", y: 315 },
+  { x: "40", y: 316 },
+  { x: "50", y: 321 },
+  { x: "60", y: 318 },
+  { x: "70", y: 304 },
+  { x: "80", y: 287 },
+  { x: "90", y: 282 },
+  { x: "100", y: 29 },
+];
+
+export const experiment_type_array = [
+  { x: "DNA Methylation", y: 490 },
+  { x: "Histone H3K4me1", y: 480 },
+  { x: "RNA-Seq", y: 521 },
+  { x: "mRNA-Seq", y: 502 },
+  { x: "smRNA-Seq", y: 515 },
+];
+export const sex_array = [
+  { x: "FEMALE", y: 1271 },
+  { x: "MALE", y: 1233 },
+];
+
 // edge case data
 
 export const singleton_category = {
