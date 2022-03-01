@@ -11,7 +11,7 @@
     "react-dom": "^17.0.2",
     "react-mutation-mapper": "^0.8.34",
     "react-scripts": "5.0.0",
-    "recharts": "^2.1.8",
+    "recharts": "^2.1.9",
     "victory": "^36.2.0",
     "web-vitals": "^2.1.2"
   },
