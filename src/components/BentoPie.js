@@ -1,11 +1,7 @@
 import React, { useState } from "react";
-import { PieChart } from "recharts/es6/chart/PieChart";
-import { Pie } from "recharts/es6/polar/Pie";
-import { Cell } from "recharts/es6/component/Cell";
-import { Curve } from "recharts/es6/shape/Curve";
-import { Tooltip } from "recharts/es6/component/Tooltip";
-import { Sector } from "recharts/es6/shape/Sector";
+import { PieChart, Pie, Cell, Curve, Tooltip, Sector}  from "recharts";
 import { polarToCartesian } from "recharts/es6/util/PolarUtils";
+
 import { COLOURS } from "../constants";
 
 const MAX_LABEL_CHARS = 16;
@@ -16,22 +12,23 @@ const LABEL_THRESHOLD = 0.03;
 const chartAspectRatio = 1.0;
 
 const textStyle = {
-  fontSize: "11px",
-  fill: "#333",
+  // fontSize: "11px",
+  // fill: "#333",
 };
 const countTextStyle = {
-  fontSize: "10px",
-  fill: "#999",
+  // fontSize: "10px",
+  // fill: "#999",
 };
 
 const titleStyle = {
-  fontStyle: "italic",
-  padding: "0",
-  marginBottom: "-15px",
+  // fontStyle: "italic",
+  // padding: "0",
+  // marginBottom: "-15px",
+  // textAlign: "center"
 };
 
 const wrapperStyle = {
-  marginBottom: "20px",
+  // marginBottom: "20px",
 };
 
 const titleHeaderHeight = 31;
@@ -75,7 +72,7 @@ const BentoPie = ({ title, data, chartHeight }) => {
           cy='50%'
           innerRadius={35}
           outerRadius={80}
-          //    label={renderLabel}
+            //  label={renderLabel}
           labelLine={false}
           isAnimationActive={false}
           onClick={onClick}
@@ -83,7 +80,7 @@ const BentoPie = ({ title, data, chartHeight }) => {
           onMouseLeave={onLeave}
           onMouseOver={onHover}
           activeIndex={activeIndex}
-          //    activeShape={this.renderActiveLabel.bind(this, this.state)}
+            //  activeShape={this.renderActiveLabel.bind(this, this.state)}
         >
           {data.map((entry, index) => (
             <Cell key={index} fill={COLOURS[index % COLOURS.length]} />
@@ -149,84 +146,87 @@ export default BentoPie;
 //     return name.substring(0, MAX_LABEL_CHARS) + "...";
 // }
 
-// const renderLabel = (activeIndex, params) => {
-//   const { cx, cy, midAngle, outerRadius, fill, payload, index } = params;
+const renderLabel = (activeIndex, params) => {
 
-//   // skip rendering this static label if the sector is selected.
-//   // this will let the 'renderActiveState' draw without overlapping.
-//   // also, skip rendering if segment is too small a percentage (avoids label clutter)
-//   if (index === activeIndex || params.percent < LABEL_THRESHOLD) {
-//     return;
-//   }
+  console.log("RENDER LABEL")
 
-//   const name = payload.name === "null" ? "(Empty)" : payload.name;
+  const { cx, cy, midAngle, outerRadius, fill, payload, index } = params;
 
-//   const sin = Math.sin(-RADIAN * midAngle);
-//   const cos = Math.cos(-RADIAN * midAngle);
-//   const sx = cx + (outerRadius + 10) * cos;
-//   const sy = cy + (outerRadius + 10) * sin;
-//   const mx = cx + (outerRadius + 20) * cos;
-//   const my = cy + (outerRadius + 20) * sin;
-//   const ex = mx + (cos >= 0 ? 1 : -1) * 22;
-//   const ey = my;
-//   const textAnchor = cos >= 0 ? "start" : "end";
+  // skip rendering this static label if the sector is selected.
+  // this will let the 'renderActiveState' draw without overlapping.
+  // also, skip rendering if segment is too small a percentage (avoids label clutter)
+  if (index === activeIndex || params.percent < LABEL_THRESHOLD) {
+    return;
+  }
 
-//   const currentTextStyle = {
-//     ...textStyle,
-//     fontWeight: payload.selected ? "bold" : "normal",
-//     fontStyle: payload.name === "null" ? "italic" : "normal",
-//   };
+  const name = payload.name === "null" ? "(Empty)" : payload.name;
 
-//   const offsetRadius = 20;
-//   const startPoint = polarToCartesian(
-//     params.cx,
-//     params.cy,
-//     params.outerRadius,
-//     midAngle
-//   );
-//   const endPoint = polarToCartesian(
-//     params.cx,
-//     params.cy,
-//     params.outerRadius + offsetRadius,
-//     midAngle
-//   );
-//   const lineProps = {
-//     ...params,
-//     fill: "none",
-//     stroke: fill,
-//     points: [startPoint, endPoint],
-//   };
+  const sin = Math.sin(-RADIAN * midAngle);
+  const cos = Math.cos(-RADIAN * midAngle);
+  const sx = cx + (outerRadius + 10) * cos;
+  const sy = cy + (outerRadius + 10) * sin;
+  const mx = cx + (outerRadius + 20) * cos;
+  const my = cy + (outerRadius + 20) * sin;
+  const ex = mx + (cos >= 0 ? 1 : -1) * 22;
+  const ey = my;
+  const textAnchor = cos >= 0 ? "start" : "end";
 
-//   return (
-//     <g>
-//       <Curve {...lineProps} type='linear' className='recharts-pie-label-line' />
+  const currentTextStyle = {
+    ...textStyle,
+    fontWeight: payload.selected ? "bold" : "normal",
+    fontStyle: payload.name === "null" ? "italic" : "normal",
+  };
 
-//       <path
-//         d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`}
-//         stroke={fill}
-//         fill='none'
-//       />
-//       <circle cx={ex} cy={ey} r={2} fill={fill} stroke='none' />
-//       <text
-//         x={ex + (cos >= 0 ? 1 : -1) * 12}
-//         y={ey + 3}
-//         textAnchor={textAnchor}
-//         style={currentTextStyle}
-//       >
-//         {this.labelShortName(name)}
-//       </text>
-//       <text
-//         x={ex + (cos >= 0 ? 1 : -1) * 12}
-//         y={ey}
-//         dy={14}
-//         textAnchor={textAnchor}
-//         style={countTextStyle}
-//       >
-//         {`(${payload.value})`}
-//       </text>
-//     </g>
-//   );
-// };
+  const offsetRadius = 20;
+  const startPoint = polarToCartesian(
+    params.cx,
+    params.cy,
+    params.outerRadius,
+    midAngle
+  );
+  const endPoint = polarToCartesian(
+    params.cx,
+    params.cy,
+    params.outerRadius + offsetRadius,
+    midAngle
+  );
+  const lineProps = {
+    ...params,
+    fill: "none",
+    stroke: fill,
+    points: [startPoint, endPoint],
+  };
+
+  return (
+    <g>
+      <Curve {...lineProps} type='linear' className='recharts-pie-label-line' />
+
+      <path
+        d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`}
+        stroke={fill}
+        fill='none'
+      />
+      <circle cx={ex} cy={ey} r={2} fill={fill} stroke='none' />
+      <text
+        x={ex + (cos >= 0 ? 1 : -1) * 12}
+        y={ey + 3}
+        textAnchor={textAnchor}
+        style={currentTextStyle}
+      >
+        {this.labelShortName(name)}
+      </text>
+      <text
+        x={ex + (cos >= 0 ? 1 : -1) * 12}
+        y={ey}
+        dy={14}
+        textAnchor={textAnchor}
+        style={countTextStyle}
+      >
+        {`(${payload.value})`}
+      </text>
+    </g>
+  );
+};
 
 // const renderActiveLabel = (params) => {
 //   const {
