@@ -28,12 +28,11 @@ const titleStyle = {
 };
 
 const wrapperStyle = {
-  // marginBottom: "20px",
 };
 
 const titleHeaderHeight = 31;
 
-const BentoPie = ({ title, data, chartHeight }) => {
+const BentoPie = ({ data, chartHeight }) => {
   const [activeIndex, setActiveIndex] = useState(undefined);
   const [itemSelected, setItemSelected] = useState(undefined);
 
@@ -60,7 +59,6 @@ const BentoPie = ({ title, data, chartHeight }) => {
 
   return (
     <div style={wrapperStyle}>
-      <h3 style={titleStyle}>{title}</h3>
       <PieChart
         height={chartHeight - titleHeaderHeight}
         width={(chartHeight - titleHeaderHeight) * chartAspectRatio}
@@ -80,7 +78,7 @@ const BentoPie = ({ title, data, chartHeight }) => {
           onMouseLeave={onLeave}
           onMouseOver={onHover}
           activeIndex={activeIndex}
-            //  activeShape={this.renderActiveLabel.bind(this, this.state)}
+             activeShape={renderActiveLabel}
         >
           {data.map((entry, index) => (
             <Cell key={index} fill={COLOURS[index % COLOURS.length]} />
@@ -228,61 +226,61 @@ const renderLabel = (activeIndex, params) => {
   );
 };
 
-// const renderActiveLabel = (params) => {
-//   const {
-//     cx,
-//     cy,
-//     midAngle,
-//     innerRadius,
-//     outerRadius,
-//     startAngle,
-//     endAngle,
-//     fill,
-//     payload,
-//   } = params;
+const renderActiveLabel = (params) => {
+  const {
+    cx,
+    cy,
+    midAngle,
+    innerRadius,
+    outerRadius,
+    startAngle,
+    endAngle,
+    fill,
+    payload,
+  } = params;
 
-//   const name = payload.name === "null" ? "(Empty)" : payload.name;
-//   const offsetRadius = 20;
-//   const sin = Math.sin(-RADIAN * midAngle);
-//   const cos = Math.cos(-RADIAN * midAngle);
-//   const sx = cx + (outerRadius + 10) * cos;
-//   const sy = cy + (outerRadius + 10) * sin;
-//   const mx = cx + (outerRadius + offsetRadius) * cos;
-//   const my = cy + (outerRadius + offsetRadius) * sin;
-//   const ex = mx + (cos >= 0 ? 1 : -1) * 22;
-//   const ey = my;
-//   const textAnchor = cos >= 0 ? "start" : "end";
+  const name = payload.name === "null" ? "(Empty)" : payload.name;
+  const offsetRadius = 20;
+  const sin = Math.sin(-RADIAN * midAngle);
+  const cos = Math.cos(-RADIAN * midAngle);
+  const sx = cx + (outerRadius + 10) * cos;
+  const sy = cy + (outerRadius + 10) * sin;
+  const mx = cx + (outerRadius + offsetRadius) * cos;
+  const my = cy + (outerRadius + offsetRadius) * sin;
+  const ex = mx + (cos >= 0 ? 1 : -1) * 22;
+  const ey = my;
+  const textAnchor = cos >= 0 ? "start" : "end";
 
-//   const currentTextStyle = {
-//     ...textStyle,
-//     fontWeight: "bold",
-//     fontStyle: payload.name === "null" ? "italic" : "normal",
-//   };
+  const currentTextStyle = {
+    ...textStyle,
+    fontWeight: "bold",
+    fontStyle: payload.name === "null" ? "italic" : "normal",
+  };
 
-//   // render coloured highlight curve but skip label
-//   return (
-//     <g>
-//       <Sector
-//         cx={cx}
-//         cy={cy}
-//         startAngle={startAngle}
-//         endAngle={endAngle}
-//         innerRadius={innerRadius}
-//         outerRadius={outerRadius}
-//         fill={fill}
-//       />
-//       <Sector
-//         cx={cx}
-//         cy={cy}
-//         startAngle={startAngle}
-//         endAngle={endAngle}
-//         innerRadius={outerRadius + 6}
-//         outerRadius={outerRadius + 10}
-//         fill={fill}
-//       />
-//     </g>
-//   );
-// };
+  // render coloured highlight curve but skip label
+  return (
+    <g>
+      <Sector
+        cx={cx}
+        cy={cy}
+        startAngle={startAngle}
+        endAngle={endAngle}
+        innerRadius={innerRadius}
+        outerRadius={outerRadius}
+        fill={fill}
+      />
+      <Sector
+        cx={cx}
+        cy={cy}
+        startAngle={startAngle}
+        endAngle={endAngle}
+        innerRadius={outerRadius + 6}
+        outerRadius={outerRadius + 10}
+        fill={fill}
+      />
+    </g>
+  );
+};
 
 const CustomTooltip = ({ active, payload, totalCount }) => {
   if (!active) {
