@@ -27,17 +27,24 @@ const titleStyle = {
   // textAlign: "center"
 };
 
-const wrapperStyle = {
-};
-
 const titleHeaderHeight = 31;
 
 const BentoPie = ({ data, chartHeight }) => {
   const [activeIndex, setActiveIndex] = useState(undefined);
   const [itemSelected, setItemSelected] = useState(undefined);
 
+  const wrapperStyle = {
+    // border: "1px solid grey",
+    borderRadius: "4px",
+    height: `${chartHeight}px`,
+    width: `${chartHeight}px`,
+    margin: "5px 5px 0 5px",
+    display: "flex",
+    flexDirection: "column",
+  };
+
   console.log("BENTO PIE");
-  console.log({ data: data });
+  console.log({ data });
 
   const onEnter = (_data, index) => {
     setActiveIndex(index);
@@ -51,8 +58,10 @@ const BentoPie = ({ data, chartHeight }) => {
     setActiveIndex(undefined);
   };
 
-  const onClick = (data) => {
+  const onClick = (c) => {
     console.log("click");
+    console.log({c: c})
+
   };
 
   const totalCount = data.reduce((sum, e) => sum + e.value, 0);
@@ -296,7 +305,7 @@ const CustomTooltip = ({ active, payload, totalCount }) => {
     backgroundColor: "rgba(255, 255, 255, 0.9)",
     padding: "5px",
     border: "1px solid grey",
-    boxShadow: "0px 0px 2px rgba(0, 0, 0, 0.9)",
+    boxShadow: "0px 0px 0x 1 px rgba(0, 0, 0, 0.9)",
     borderRadius: "2px",
     textAlign: "left",
   };
