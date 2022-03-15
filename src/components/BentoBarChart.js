@@ -3,6 +3,8 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, Label } from "recharts";
 
 const ASPECT_RATIO = 1.2;
 const MAX_LABEL_CHARS = 15;
+const BIN_PIXEL_WIDTH = 50;
+const NON_BIN_CONTENT_WIDTH = 50;
 
 const BentoBarChart = ({ title, data, units, height }) => {
   const titleStyle = {
@@ -25,12 +27,15 @@ const BentoBarChart = ({ title, data, units, height }) => {
   };
 
   const totalCount = data.reduce((sum, e) => sum + e.y, 0);
+  const chartWidth = BIN_PIXEL_WIDTH * data.length + NON_BIN_CONTENT_WIDTH;
+  console.log({ chartWidth: chartWidth });
 
   return (
     <div style={wrapperStyle}>
       <div style={titleStyle}>{title}</div>
       <BarChart
-        width={height * ASPECT_RATIO}
+        // width={height * ASPECT_RATIO}
+        width={chartWidth}
         height={height}
         data={data}
         margin={{ bottom: 100 }}
