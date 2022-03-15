@@ -1,7 +1,12 @@
 import React from "react";
 import BentoPie from "./BentoPie";
 import TestVictoryPie from "./TestVictoryPie";
-import { phenotypicFeatures, experiment_type_array } from "../data";
+import {
+  phenotypicFeatures,
+  experiment_type_array,
+  ages_array,
+  sex_array,
+} from "../data";
 import BentoClassPie from "./BentoClassPie";
 import ChartWrapper from "./ChartWrapper";
 import BentoBarChart from "./BentoBarChart";
@@ -59,6 +64,13 @@ const Dashboard = () => {
         units={"mg/L"}
         height={300}
       />
+      <BentoBarChart
+        title={"Ages"}
+        data={ages_array}
+        units={"years"}
+        height={300}
+      />
+      <BentoBarChart title={"Sexes"} data={sex_array} units={""} height={300} />
     </div>
   );
 };
