@@ -115,14 +115,16 @@ export const sex = {
 
 // synthetic public dashboard data, array of object format
 export const ages_array = [
-  { x: "20", y: 332 },
-  { x: "30", y: 315 },
+  { x: "0", y: 66 },
+  { x: "10", y: 75 },
+  { x: "20", y: 221 },
+  { x: "30", y: 265 },
   { x: "40", y: 316 },
   { x: "50", y: 321 },
   { x: "60", y: 318 },
-  { x: "70", y: 304 },
-  { x: "80", y: 287 },
-  { x: "90", y: 282 },
+  { x: "70", y: 178 },
+  { x: "80", y: 167 },
+  { x: "90", y: 177 },
   { x: "100", y: 29 },
 ];
 

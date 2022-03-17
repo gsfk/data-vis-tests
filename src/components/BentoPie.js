@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { PieChart, Pie, Cell, Curve, Tooltip, Sector}  from "recharts";
+import { PieChart, Pie, Cell, Curve, Tooltip, Sector } from "recharts";
 import { polarToCartesian } from "recharts/es6/util/PolarUtils";
 
 import { COLOURS } from "../constants";
@@ -61,8 +61,7 @@ const BentoPie = ({ data, chartHeight }) => {
 
   const onClick = (c) => {
     console.log("click");
-    console.log({c: c})
-
+    console.log({ c: c });
   };
 
   const totalCount = data.reduce((sum, e) => sum + e.value, 0);
@@ -80,7 +79,7 @@ const BentoPie = ({ data, chartHeight }) => {
           cy='50%'
           innerRadius={35}
           outerRadius={80}
-            //  label={renderLabel}
+          //  label={renderLabel}
           labelLine={false}
           isAnimationActive={false}
           onClick={onClick}
@@ -88,7 +87,7 @@ const BentoPie = ({ data, chartHeight }) => {
           onMouseLeave={onLeave}
           onMouseOver={onHover}
           activeIndex={activeIndex}
-             activeShape={renderActiveLabel}
+          activeShape={renderActiveLabel}
         >
           {data.map((entry, index) => (
             <Cell key={index} fill={COLOURS[index % COLOURS.length]} />
@@ -155,8 +154,7 @@ export default BentoPie;
 // }
 
 const renderLabel = (activeIndex, params) => {
-
-  console.log("RENDER LABEL")
+  console.log("RENDER LABEL");
 
   const { cx, cy, midAngle, outerRadius, fill, payload, index } = params;
 
