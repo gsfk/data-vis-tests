@@ -17,6 +17,8 @@ const BentoBarChart = ({ title, data, units, height }) => {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    backgroundColor: "lightGrey",
+    border: "1px solid black"
   };
 
   const tickFormatter = (tickLabel) => {
