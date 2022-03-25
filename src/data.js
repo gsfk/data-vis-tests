@@ -134,7 +134,7 @@ export const experiment_type_array = [
   { x: "Histone H3K4me1", y: 480 },
   { x: "RNA-Seq", y: 521 },
   { x: "mRNA-Seq", y: 502 },
-  { x: "missing", y: 212}
+  { x: "missing", y: 212},
   { x: "smRNA-Seq", y: 515 },
 ];
 export const sex_array = [
