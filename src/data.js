@@ -134,6 +134,7 @@ export const experiment_type_array = [
   { x: "RNA-Seq", y: 521 },
   { x: "mRNA-Seq", y: 502 },
   { x: "smRNA-Seq", y: 515 },
+  { x: "missing", y: 212}
 ];
 export const sex_array = [
   { x: "FEMALE", y: 1271 },
