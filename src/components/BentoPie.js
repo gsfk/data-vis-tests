@@ -40,7 +40,7 @@ const BentoPie = ({ data, chartHeight }) => {
     width: `${chartHeight}px`,
     margin: "5px 5px 0 5px",
     display: "flex",
-    flexDirection: "column",
+    justifyContent: "center",
   };
 
   console.log("BENTO PIE");
