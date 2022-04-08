@@ -1,10 +1,12 @@
 import React from "react";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, Label } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, Label, Cell } from "recharts";
 
 const ASPECT_RATIO = 1.2;
 const MAX_LABEL_CHARS = 15;
 const BIN_PIXEL_WIDTH = 50;
 const NON_BIN_CONTENT_WIDTH = 50;
+const FILL_COLOUR = "#ff0000";
+const MISSING_FILL_COLOUR = "#bbbbbb";
 
 const BentoBarChart = ({ title, data, units, height }) => {
   const titleStyle = {
@@ -17,6 +19,8 @@ const BentoBarChart = ({ title, data, units, height }) => {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    // backgroundColor: "lightGrey",
+    // border: "1px solid black"
   };
 
   const tickFormatter = (tickLabel) => {
@@ -30,6 +34,10 @@ const BentoBarChart = ({ title, data, units, height }) => {
   const chartWidth = BIN_PIXEL_WIDTH * data.length + NON_BIN_CONTENT_WIDTH;
   console.log({ chartWidth: chartWidth });
 
+  const fill = (entry) => {
+    return entry.x == "missing" ? MISSING_FILL_COLOUR : FILL_COLOUR;
+  };
+
   return (
     <div style={wrapperStyle}>
       <div style={titleStyle}>{title}</div>
@@ -40,20 +48,19 @@ const BentoBarChart = ({ title, data, units, height }) => {
         data={data}
         margin={{ bottom: 100 }}
       >
-        <XAxis
-          dataKey='x'
-          height={20}
-          angle={-45}
-          dy={15}
-          tickFormatter={tickFormatter}
-        >
-          <Label value={units} offset={-40} position='insideBottom' />
+        <XAxis dataKey="x" height={20} angle={-45} dy={15} tickFormatter={tickFormatter}>
+          <Label value={units} offset={-40} position="insideBottom" />
         </XAxis>
         <YAxis>
-          <Label value='Count' offset={-10} position='left' angle={270} />
+          <Label value="Count" offset={-10} position="left" angle={270} />
         </YAxis>
         <Tooltip content={<BarTooltip totalCount={totalCount} />} />
-        <Bar dataKey='y' fill='#ff0000' isAnimationActive={false} />
+        {/* <Bar dataKey='y' fill='#ff0000' isAnimationActive={false} /> */}
+        <Bar dataKey="y">
+          {data.map((entry, index) => (
+            <Cell key={`cell-${entry}`} stroke={"black"} fill={fill(entry)} strokeWidth={1} />
+          ))}
+        </Bar>
       </BarChart>
     </div>
   );
