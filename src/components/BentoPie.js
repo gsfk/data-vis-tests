@@ -7,6 +7,7 @@ import { COLOURS } from "../constants";
 const MAX_LABEL_CHARS = 16;
 const RADIAN = Math.PI / 180;
 const LABEL_THRESHOLD = 0.03;
+const MISSING_FILL_COLOUR = "#bbbbbb";
 
 // hardcode for now, always want height = width
 const chartAspectRatio = 1.0;
@@ -89,7 +90,14 @@ const BentoPie = ({ data, chartHeight }) => {
           activeShape={renderActiveLabel}
         >
           {data.map((entry, index) => (
-            <Cell key={index} fill={COLOURS[index % COLOURS.length]} />
+            <Cell
+              key={index}
+              fill={
+                entry.name === "missing"
+                  ? MISSING_FILL_COLOUR
+                  : COLOURS[index % COLOURS.length]
+              }
+            />
           ))}
         </Pie>
         <Tooltip
