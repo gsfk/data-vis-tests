@@ -48,17 +48,31 @@ const BentoBarChart = ({ title, data, units, height }) => {
         data={data}
         margin={{ bottom: 100 }}
       >
-        <XAxis dataKey="x" height={20} angle={-45} dy={15} tickFormatter={tickFormatter}>
-          <Label value={units} offset={-40} position="insideBottom" />
+        <XAxis
+          dataKey='x'
+          height={20}
+          angle={-45}
+          dy={15}
+          dx={0}
+          tickFormatter={tickFormatter}
+          textAnchor='end'
+          interval={"preserveStartEnd"}
+        >
+          <Label value={units} offset={-40} position='insideBottom' />
         </XAxis>
         <YAxis>
-          <Label value="Count" offset={-10} position="left" angle={270} />
+          <Label value='Count' offset={-10} position='left' angle={270} />
         </YAxis>
         <Tooltip content={<BarTooltip totalCount={totalCount} />} />
         {/* <Bar dataKey='y' fill='#ff0000' isAnimationActive={false} /> */}
-        <Bar dataKey="y">
+        <Bar dataKey='y'>
           {data.map((entry, index) => (
-            <Cell key={`cell-${entry}`} stroke={"black"} fill={fill(entry)} strokeWidth={1} />
+            <Cell
+              key={`cell-${entry}`}
+              stroke={"black"}
+              fill={fill(entry)}
+              strokeWidth={1}
+            />
           ))}
         </Bar>
       </BarChart>
