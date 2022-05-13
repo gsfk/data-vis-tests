@@ -31,7 +31,7 @@ const Dashboard = () => {
   const wrapperHeight = 250;
 
   return (
-    <div style={{ width: "500px", textAlign: "center" }}>
+    <div style={{ width: "500px" }}>
       <h1>Dashboard</h1>
       <BentoPie
         title={"Bento function pie"}

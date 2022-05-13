@@ -27,7 +27,7 @@ const ChartWrapper = ({ chartType, title, data, height }) => {
     background: "#f5f5f5",
     fontWeight: "bold",
     padding: "5px 0 5px 0",
-    // alignSelf: "strech"
+    textAlign: "center",
   };
 
   const pieStyle = {
